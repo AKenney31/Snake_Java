@@ -21,6 +21,9 @@ public class View {
 	private MenuScreen menuScreen;
 	private GameScreen gameScreen;
 	
+	/**
+	 * View constructor
+	 */
 	public View() {
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 		height = (int) size.getHeight() - 65;
@@ -30,8 +33,8 @@ public class View {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.cont = new Controller(this);
-		this.menuScreen = new MenuScreen(frame, width, height, cont.getMenu());
-		this.gameScreen = new GameScreen(frame, width, height, cont.getGame());
+		this.menuScreen = new MenuScreen(frame, cont, width, height, cont.getMenu());
+		this.gameScreen = new GameScreen(frame, cont, width, height);
 		changeScreen(CurrentScreen.MENU);
 	}
 	
@@ -54,6 +57,10 @@ public class View {
 		}
 	}
 	
+	/**
+	 * Main Method... This method creates a new View instance which automatically opens the menu screen
+	 * @param args
+	 */
 	public static void main(String [] args) {
 		System.out.println("WELCOME TO JAVA SNAKE");
 		new View();
