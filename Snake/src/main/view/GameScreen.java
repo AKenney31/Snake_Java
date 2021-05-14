@@ -11,15 +11,15 @@ import javax.swing.JFrame;
  *
  */
 
-public class MenuScreen extends Window{
+public class GameScreen extends Window{
 	private JFrame frame;
-	private JButton men;
+	private JButton game;
 	private int width;
 	private int height;
 	
-	public MenuScreen(JFrame frame, int width, int height, JButton men) {
+	public GameScreen(JFrame frame, int width, int height, JButton game) {
 		this.frame = frame;
-		this.men = men;
+		this.game = game;
 		this.height = height;
 		this.width = width;
 	}
@@ -29,7 +29,7 @@ public class MenuScreen extends Window{
 		frame.getContentPane().removeAll();
 		FlowLayout fl = new FlowLayout(FlowLayout.CENTER);
 		frame.setLayout(fl);
-		frame.add(men);
+		frame.add(game);
 		frame.setVisible(true);
 	}
 

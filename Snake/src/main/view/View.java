@@ -5,18 +5,21 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import main.controller.Controller;
 import main.enums.CurrentScreen;
 
 /**
  * constructor for the View class
  */	
 public class View {
+	private Controller cont;
 	private int width;
 	private int height;
 	private JFrame frame;
 	
 	//Windows
 	private MenuScreen menuScreen;
+	private GameScreen gameScreen;
 	
 	public View() {
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -24,10 +27,11 @@ public class View {
 		width = (int) size.getWidth();
 		
 		frame = new JFrame("Snake Game");
-		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.menuScreen = new MenuScreen(frame);
+		this.cont = new Controller(this);
+		this.menuScreen = new MenuScreen(frame, width, height, cont.getMenu());
+		this.gameScreen = new GameScreen(frame, width, height, cont.getGame());
 		changeScreen(CurrentScreen.MENU);
 	}
 	
@@ -40,6 +44,9 @@ public class View {
 		switch(cs) {
 		case MENU:
 			menuScreen.draw();
+			break;
+		case GAME:
+			gameScreen.draw();
 			break;
 		default:
 			menuScreen.draw();
