@@ -24,8 +24,7 @@ public class GameScreen extends Window{
 	private JFrame frame;
 	private int width;
 	private int height;
-	private Grid grid;
-	private Controller cont;
+	private GamePanel panel;
 	
 	/**
 	 * GameScreen constructor
@@ -38,8 +37,7 @@ public class GameScreen extends Window{
 		this.frame = frame;
 		this.height = height;
 		this.width = width;
-		this.cont = cont;
-		this.grid = new Grid(width, height, cont);
+		this.panel = new GamePanel(width, height, cont);
 	}
 	
 	/**
@@ -50,7 +48,7 @@ public class GameScreen extends Window{
 		frame.setVisible(false);
 		frame.setSize(width, height);
 		frame.getContentPane().removeAll();
-		frame.setContentPane(grid);
+		frame.setContentPane(panel);
 		frame.setVisible(true);
 	}
 

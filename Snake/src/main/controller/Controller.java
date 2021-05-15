@@ -18,6 +18,7 @@ import main.view.View;
 public class Controller {
 	View view;
 	Model model;
+	Boolean run = false;
 	
 	//Define Buttons
 	JButton gameSc = new JButton("Game");
@@ -30,6 +31,7 @@ public class Controller {
 	 */
 	public Controller(View view) {
 		this.view = view;
+		this.model = new Model();
 		
 		//Button Handlers
 		gameSc.addActionListener(new ActionListener() {
@@ -41,10 +43,17 @@ public class Controller {
 		menuSc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//startGame();
 				view.changeScreen(CurrentScreen.GAME);
 			}
 		});
 	}
+	
+	/*
+	 * public void startGame() { run = true; Thread gameThread = new Thread() {
+	 * 
+	 * }; }
+	 */
 	
 	//Getters
 	public JButton getGame() {
@@ -52,5 +61,8 @@ public class Controller {
 	}
 	public JButton getMenu() {
 		return menuSc;
+	}
+	public Model getModel() {
+		return model;
 	}
 }
