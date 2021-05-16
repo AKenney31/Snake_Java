@@ -1,6 +1,7 @@
 package main.model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 
 import main.enums.Direction;
@@ -18,12 +19,13 @@ public class Model {
 	private Snake snake;
 	private Food food;
 	private int snakeLength = 0;
+	private ArrayList<Turn> turns = new ArrayList<Turn>();
 	
 	/**
 	 * This is the constructor for model
 	 */
 	public Model() {
-		snake = new Snake(7, 7, Direction.EAST);
+		snake = new Snake(0, 7, Direction.EAST);
 		makeFood();
 	}
 	
@@ -53,6 +55,10 @@ public class Model {
 		return food;
 	}
 	
+	public ArrayList<Turn> getTurns(){
+		return turns;
+	}
+	
 	public Color getColor() {
 		return color;
 	}
@@ -68,5 +74,37 @@ public class Model {
 	
 	public void incSnakeLength() {
 		this.snakeLength++;
+		Snake tmp = snake;
+		while(tmp.getNext() != null) {
+			tmp = tmp.getNext();
+		}
+		int newSX, newSY;
+		switch(tmp.getDirection()) {
+		case NORTH:
+			newSX = tmp.getX();
+			newSY = tmp.getY() + 1;
+			break;
+		case EAST:
+			newSX = tmp.getX() - 1;
+			newSY = tmp.getY();
+			break;
+		case SOUTH:
+			newSX = tmp.getX();
+			newSY = tmp.getY() - 1;
+			break;
+		case WEST:
+			newSX = tmp.getX() + 1;
+			newSY = tmp.getY();
+			break;
+		default:
+			newSX = 0;
+			newSY = 0;
+			break;
+		}
+		tmp.setNext(new Snake(newSX, newSY, tmp.getDirection()));
+	}
+	
+	public void addTurn(Turn t) {
+		turns.add(t);
 	}
 }

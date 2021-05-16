@@ -40,6 +40,11 @@ public class GameScreen extends Window{
 		this.panel = new GamePanel(width, height, cont);
 	}
 	
+	//Getter
+	public GamePanel getGamePanel() {
+		return panel;
+	}
+	
 	/**
 	 * This method updates the frame with the components of the snake screen
 	 */

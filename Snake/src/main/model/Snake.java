@@ -29,16 +29,6 @@ public class Snake {
 		this.next = null;
 	}
 	
-	/**
-	 * This is a static method used to tag a new body piece to the end of the snake
-	 * 
-	 * @param head
-	 */
-	public static void addBodyPiece(Snake head) {
-		Snake tmp;
-		for(tmp = head; tmp.getNext() != null; tmp = tmp.getNext());
-		tmp.setNext(new Snake(tmp.getX() + 1, tmp.getY() + 1, tmp.getDirection()));
-	}
 	//Getters
 	public int getX() {
 		return x;
@@ -63,5 +53,25 @@ public class Snake {
 	
 	public void setDirection(Direction dir) {
 		direction = dir;
+	}
+	
+	//Move the snake piece based on its current direction
+	public void move() {
+		switch(direction) {
+		case NORTH:
+			y--;
+			break;
+		case EAST:
+			x++;
+			break;
+		case SOUTH:
+			y++;
+			break;
+		case WEST:
+			x--;
+			break;
+		default:
+			break;
+		}
 	}
 }

@@ -58,6 +58,22 @@ public class View {
 	}
 	
 	/**
+	 * This method fetches the game panel from the game screen
+	 * @return The game panel
+	 */
+	public GamePanel getGamePanel() {
+		return gameScreen.getGamePanel();
+	}
+	
+	/**
+	 * Getter for frame
+	 * @return the frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	/**
 	 * Main Method... This method creates a new View instance which automatically opens the menu screen
 	 * @param args
 	 */

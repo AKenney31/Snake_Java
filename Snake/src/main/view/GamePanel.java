@@ -37,24 +37,6 @@ public class GamePanel extends JPanel{
 		this.width = width;
 		this.height = height;
 		this.cont = cont;
-	}
-	
-	@Override
-	   public void paint(Graphics g) {
-		System.out.println("HERE");
-	      Graphics2D graphic2d = (Graphics2D) g;
-	      Image background = new ImageIcon("src/main/view/images/rainforest.jpg").getImage();
-	      g.drawImage(background, 0, 0, width, height, null);
-	      drawGridLines(graphic2d);
-	      drawSnake(graphic2d);
-	      drawFood(graphic2d);
-	}
-	
-	/**
-	 * Draws the grid lines and game window on the screen
-	 * @param g
-	 */
-	private void drawGridLines(Graphics2D g) {
 		gridStartX = (int)(width * .1);
 		gridWidth = (int)(width * .8);
 		gridStartY = (int)(height * .1);
@@ -62,10 +44,25 @@ public class GamePanel extends JPanel{
 		squareWidth = (int)(gridHeight / 15);
 		gameWidth = squareWidth * 15;
 		gameWidthDiff = (int)((gridHeight - gameWidth) / 2);
-		
-		g.setColor(Color.WHITE);
-		g.fillRect(gridStartX, gridStartY, gridWidth, gridHeight);
-		
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		  Graphics2D graphic2d = (Graphics2D) g;
+		  Image background = new ImageIcon("src/main/view/images/rainforest.jpg").getImage();
+		  g.drawImage(background, 0, 0, width, height, null);
+		  g.setColor(Color.WHITE);
+		  g.fillRect(gridStartX, gridStartY, gridWidth, gridHeight);
+		  drawGridLines(graphic2d);
+		  drawSnake(graphic2d);
+		  drawFood(graphic2d);
+	}
+	
+	/**
+	 * Draws the grid lines and game window on the screen
+	 * @param g
+	 */
+	private void drawGridLines(Graphics2D g) {	
 		g.setColor(Color.BLACK);		
 		for(int startX = gridStartX; startX <= gridStartX + gameWidth; startX += squareWidth) {
 			g.drawLine(startX + gameWidthDiff, gridStartY + gameWidthDiff, startX + gameWidthDiff, gridStartY + gameWidth + gameWidthDiff);
@@ -93,18 +90,32 @@ public class GamePanel extends JPanel{
 			//draw eyes
 			if(tmp == m.getSnake()) {
 				g.setColor(Color.ORANGE);
+				int ex;
+				int ey;
 				switch(tmp.getDirection()) {
 				case EAST:
-					int ex = snakeX * squareWidth + beginningX + (int)(squareWidth * .7);
-					int ey = snakeY * squareWidth + beginningY + (int)(squareWidth * .2);
+					ex = snakeX * squareWidth + beginningX + (int)(squareWidth * .7);
+					ey = snakeY * squareWidth + beginningY + (int)(squareWidth * .2);
 					g.fillOval(ex, ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
 					g.fillOval(ex, ey + (int)(squareWidth * .5), (int)(squareWidth * .2), (int)(squareWidth * .2));
 					break;
 				case NORTH:
+					ex = snakeX * squareWidth + beginningX + (int)(squareWidth * .2);
+					ey = snakeY * squareWidth + beginningY + (int)(squareWidth * .2);
+					g.fillOval(ex, ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
+					g.fillOval(ex + (int)(squareWidth * .5), ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
 					break;
 				case WEST:
+					ex = snakeX * squareWidth + beginningX + (int)(squareWidth * .2);
+					ey = snakeY * squareWidth + beginningY + (int)(squareWidth * .2);
+					g.fillOval(ex, ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
+					g.fillOval(ex, ey + (int)(squareWidth * .5), (int)(squareWidth * .2), (int)(squareWidth * .2));
 					break;
 				case SOUTH:
+					ex = snakeX * squareWidth + beginningX + (int)(squareWidth * .2);
+					ey = snakeY * squareWidth + beginningY + (int)(squareWidth * .7);
+					g.fillOval(ex, ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
+					g.fillOval(ex + (int)(squareWidth * .5), ey, (int)(squareWidth * .2), (int)(squareWidth * .2));
 					break;
 				default:
 					break;
