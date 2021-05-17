@@ -12,7 +12,6 @@ public class Snake {
 	//X and Y are integers between 0 and 14 that represent the grid space that the snake will be painted on
 	private int x;
 	private int y;
-	private Snake next;
 	private Direction direction;
 	
 	/**
@@ -26,7 +25,6 @@ public class Snake {
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
-		this.next = null;
 	}
 	
 	//Getters
@@ -38,19 +36,11 @@ public class Snake {
 		return y;
 	}
 	
-	public Snake getNext() {
-		return next;
-	}
-	
 	public Direction getDirection() {
 		return direction;
 	}
 	
 	//Setters
-	public void setNext(Snake next) {
-		this.next = next;
-	}
-	
 	public void setDirection(Direction dir) {
 		direction = dir;
 	}

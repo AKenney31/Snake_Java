@@ -12,7 +12,7 @@ public class Turn {
 	private Direction newDir;
 	private int x;
 	private int y;
-	private int count = 1;
+	private int count = 0;
 	public Turn(Direction newDir, int x, int y) {
 		this.newDir = newDir;
 		this.x = x;

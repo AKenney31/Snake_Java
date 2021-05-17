@@ -1,16 +1,6 @@
 package main.view;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import main.controller.Controller;
 
@@ -25,6 +15,7 @@ public class GameScreen extends Window{
 	private int width;
 	private int height;
 	private GamePanel panel;
+	private Controller cont;
 	
 	/**
 	 * GameScreen constructor
@@ -37,11 +28,14 @@ public class GameScreen extends Window{
 		this.frame = frame;
 		this.height = height;
 		this.width = width;
-		this.panel = new GamePanel(width, height, cont);
+		this.cont = cont;
 	}
 	
-	//Getter
-	public GamePanel getGamePanel() {
+	/**
+	 * panel getter
+	 * @return
+	 */
+	public GamePanel getPanel() {
 		return panel;
 	}
 	
@@ -51,8 +45,8 @@ public class GameScreen extends Window{
 	@Override
 	public void draw() {
 		frame.setVisible(false);
-		frame.setSize(width, height);
 		frame.getContentPane().removeAll();
+		panel = new GamePanel(width, height, cont);
 		frame.setContentPane(panel);
 		frame.setVisible(true);
 	}

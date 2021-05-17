@@ -24,8 +24,8 @@ public enum Direction {
 	}
 	
 	/**
-	 * gets the enum of the screen
-	 * @return name of screen
+	 * gets the direction
+	 * @return direction
 	 */
 	public String getName() {
 		return name;

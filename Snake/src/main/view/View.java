@@ -30,12 +30,21 @@ public class View {
 		width = (int) size.getWidth();
 		
 		frame = new JFrame("Snake Game");
+		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.cont = new Controller(this);
-		this.menuScreen = new MenuScreen(frame, cont, width, height, cont.getMenu());
+		this.menuScreen = new MenuScreen(frame, cont, width, height);
 		this.gameScreen = new GameScreen(frame, cont, width, height);
 		changeScreen(CurrentScreen.MENU);
+	}
+	
+	/**
+	 * gameScreen getter
+	 * @return
+	 */
+	public GameScreen getGameScreen() {
+		return gameScreen;
 	}
 	
 	/**
@@ -55,22 +64,6 @@ public class View {
 			menuScreen.draw();
 			break;
 		}
-	}
-	
-	/**
-	 * This method fetches the game panel from the game screen
-	 * @return The game panel
-	 */
-	public GamePanel getGamePanel() {
-		return gameScreen.getGamePanel();
-	}
-	
-	/**
-	 * Getter for frame
-	 * @return the frame
-	 */
-	public JFrame getFrame() {
-		return frame;
 	}
 	
 	/**
