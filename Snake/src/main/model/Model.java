@@ -1,8 +1,11 @@
 package main.model;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import main.enums.Direction;
 import main.enums.Speed;
@@ -30,7 +33,6 @@ public class Model {
 	public Model() {
 		this.color = Color.RED;
 		this.speed = Speed.SLOW;
-		this.highScore = 70;
 		snake.add(new Snake(0, 7, Direction.EAST));
 		makeFood();
 	}
@@ -89,6 +91,47 @@ public class Model {
 		speed = s;
 	}
 	
+	public void setHighScore() {
+		String endURL = "";
+		switch(this.speed) {
+		case SLOW:
+			endURL = "slow.txt";
+			break;
+		case MID:
+			endURL = "mid.txt";
+			break;
+		case FAST:
+			endURL = "fast.txt";
+			break;
+		}
+		try {
+			File fi = new File("src/main/model/highscores/" + endURL);
+			Scanner scan = new Scanner(fi);
+			String num = scan.nextLine();
+			highScore = Integer.parseInt(num);
+			scan.close();
+			System.out.println("High Score Loaded: " + highScore);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			highScore = 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			highScore = 0;
+		}
+	}
+	
+	/**
+	 * This method will add a new turn to the end of the turns array list
+	 * @param t
+	 */
+	public void addTurn(Turn t) {
+		turns.add(t);
+	}
+	
+	/**
+	 * This method will add 1 to the length variable and add a new body piece to the end of the snake
+	 */
 	public void incSnakeLength() {
 		Snake tmp = snake.get(snakeLength);
 		this.snakeLength++;
@@ -116,9 +159,5 @@ public class Model {
 			break;
 		}
 		snake.add(new Snake(newSX, newSY, tmp.getDirection()));
-	}
-	
-	public void addTurn(Turn t) {
-		turns.add(t);
 	}
 }

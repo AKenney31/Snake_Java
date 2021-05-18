@@ -207,5 +207,6 @@ public class GamePanel extends JPanel implements Runnable{
 				gameStop = true;
 			}
 		}
+		cont.updateHighScores();
 	}
 }

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
@@ -13,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
-import javax.swing.Timer;
 
 import main.enums.CurrentScreen;
 import main.enums.Direction;
@@ -60,6 +62,7 @@ public class Controller {
 		menuSc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				model.setHighScore();
 				view.changeScreen(CurrentScreen.GAME);
 			}
 		});
@@ -250,6 +253,39 @@ public class Controller {
 		});
 	}
 	
+	/**
+	 * Saves the new high score in a text file
+	 */
+	public void updateHighScores() {
+		if(model.getSnakeLength() > model.getHighScore()) {
+			String endURL = "";
+			switch(model.getSpeed()) {
+			case SLOW:
+				endURL = "slow.txt";
+				break;
+			case MID:
+				endURL = "mid.txt";
+				break;
+			case FAST:
+				endURL = "fast.txt";
+				break;
+			}
+			try {
+				File fi = new File("src/main/model/highscores/" + endURL);
+				FileWriter fw = new FileWriter(fi, false);
+				String newHigh = "" + model.getSnakeLength();
+				System.out.println(newHigh);
+				fw.write(newHigh);
+				fw.flush();
+				fw.close();
+				System.out.println("Highscore saved");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	//Getters
 	public JButton getMenuButton() {
 		return menuSc;
