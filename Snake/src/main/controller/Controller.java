@@ -70,6 +70,7 @@ public class Controller {
 		gameSc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				view.getGameScreen().getPanel().killThread();
 				model = new Model();
 				unaddKeyBinds();
 				view.changeScreen(CurrentScreen.MENU);

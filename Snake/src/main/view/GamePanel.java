@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	private int infoScreenStart = 0;
 	private int infoScreenWidth = 0;
 	private boolean gameStop;
+	private Thread t;
 	
 	public GamePanel(int width, int height, Controller cont) {
 		super();
@@ -59,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 		backToMenu.setBounds(infoScreenStart + (int)(infoScreenWidth * .5) - (int)(infoScreenWidth * .5 / 2),
 				gridStartY + (int)(gridHeight * .6), (int)(infoScreenWidth * .5), (int)(gridHeight * .1));
 		add(backToMenu);
-		Thread t = new Thread(this);
+		t = new Thread(this);
 		t.start();
 	}
 	
@@ -203,10 +204,16 @@ public class GamePanel extends JPanel implements Runnable{
 				gameStop = cont.tick();
 				repaint();
 			}catch(Exception e) {
-				e.printStackTrace();
 				gameStop = true;
 			}
 		}
 		cont.updateHighScores();
+	}
+	
+	public void killThread() {
+		gameStop = true;
+		if(t.isAlive()) {
+			t.interrupt();
+		}
 	}
 }

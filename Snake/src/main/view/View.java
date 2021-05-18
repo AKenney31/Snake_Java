@@ -26,7 +26,7 @@ public class View {
 	 */
 	public View() {
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-		height = (int) size.getHeight() - 65;
+		height = (int) size.getHeight();
 		width = (int) size.getWidth();
 		
 		frame = new JFrame("Snake Game");
